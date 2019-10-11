@@ -1,0 +1,16 @@
+import random
+a = [random.randint(0,9),random.randint(0,9)] 
+b = [random.randint(0,9),random.randint(0,9)] 
+c = [random.randint(0,9),random.randint(0,9)] 
+d = [random.randint(0,9),random.randint(0,9)] 
+e = [random.randint(0,9),random.randint(0,9)] 
+cidades = [a,b,c,d,e]
+
+def individuo ():
+	individuo = []
+	while len(individuo)<5:	
+		cidadeSorteada =random.randint(0,4) 
+		if cidades[cidadeSorteada] not in individuo:
+				individuo.append(cidades[cidadeSorteada])
+			
+	return individuo
