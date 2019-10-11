@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+import random
+a = [random.randint(0,9),random.randint(0,9)] 
+b = [random.randint(0,9),random.randint(0,9)] 
+c = [random.randint(0,9),random.randint(0,9)] 
+d = [random.randint(0,9),random.randint(0,9)] 
+e = [random.randint(0,9),random.randint(0,9)] 
+cidades = [a,b,c,d,e]
+
+def individuo ():
+	individuo = []
+	while len(individuo)<5:	
+		cidadeSorteada =random.randint(0,4) 
+		if cidades[cidadeSorteada] not in individuo:
+				individuo.append(cidades[cidadeSorteada])
+			
+	return individuo
+
+
+populacao = []
+while len(populacao)<20:	
+	ind = individuo()
+	if ind not in populacao:
+		populacao.append(ind)
+		print(ind)
+
+#distancia é: d raiz de (x2-x1)² + (y2-y1)²
+#saber a distancia total da rota de cada individuo
+print("!!!!!!!!!!!!!!!!!!!!!")
+rota = []
+
+for i in range(20):
+	print(populacao[i])
+	for j in range(1,5):
+		print('j', j)
+		x1 = populacao[i][j-1][0]
+		y1 = populacao[i][j-1][1]
+		x2 = populacao[i][j][0]
+		y2 = populacao[i][j][1]
+
+		d = ((x2-x1) ** 2 + (y2-y1) ** 2) ** 0.5
+		print(d)
+		print(populacao[i][j-1])
+		print(populacao[i][j])
+		
