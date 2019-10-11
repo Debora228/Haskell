@@ -1,0 +1,37 @@
+--clásula where melhora a legibilidade do código
+
+quad :: Int -> Int --define o nome da funcao, o que recebe e o que retorna
+quad n = quad_n where quad_n = n*n*n
+
+-- tres formas de fazer o desvio condicionar
+
+if_par :: Int -> Bool
+if_par n = if(mod n 2 == 0) then True else False
+
+case_par ::Int -> Bool
+case_par n = case (mod n 2 == 0) of
+			True -> True
+			False -> False
+
+guarda :: Int -> Bool
+guarda n | (mod n 2 == 0) = True
+		 | otherwise  = False
+
+-- estrutura de repeticao
+--  Não possui comandos de repetição como While e For
+principal = do --força uma execuçao sequencial de comandos
+		let num = 33 ::Int
+		adivinhar num
+
+adivinhar num = do
+		putStr "\nDigite um número entre 1 e 50: "
+		n <- getLine
+		if (read n) < num
+			then do 
+				putStrLn "Dica: mais pra cima!"
+				adivinhar num
+			else if (read n) > num
+				then do
+					putStrLn "Dica: mais para baixo!"
+					adivinhar num
+				else do putStrLn "Parabéns!! Você acertou!!"
