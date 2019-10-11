@@ -1,0 +1,31 @@
+-- Arvore binária
+
+-- definir um tipo de variável
+--data ArvBin = Nulo | No Int ArvBin ArvBin
+-- - data: é uma palavra reservada
+-- - ArvBin: nao é uma palavra reservada
+-- - Nulo: é uma escolha errada para nome, pq nao é uma palavra reservada, seria melhor colocar MyEmptyNode
+-- - No: também nao é definido pela linguagem, seria melhor colocar My FilledNode
+data ArvBin = NoVazio | FilledNode Int ArvBin ArvBin --definimos uma estrutura de dados reursiva
+
+arv :: ArvBin
+--Criar a árvore
+arv = (FilledNode 10 
+			(FilledNode 5 -- nó a esquerda da raiz principal
+				(FilledNode 4 NoVazio NoVazio) (FilledNode 8 NoVazio NoVazio))
+			(FilledNode 15 -- nó a direita 
+				(FilledNode 11 NoVazio NoVazio) NoVazio))
+
+--ler in-order, pos-order, pre-order
+order :: Int -> ArvBin -> [Int]
+order aux NoVazio = []
+order aux (FilledNode a esquerda direita)  | aux == 0 = [a] ++ (order aux esquerda) ++ (order aux direita) --pre-order
+								   | aux == 1 = (order aux esquerda) ++ [a] ++ (order aux direita) --in-order
+								   | aux == 2 = (order aux esquerda) ++ (order aux direita) ++ [a] --posorder
+
+-- buscar elemento numa arvore binaria buscar aux Nulo = False
+buscar :: ArvBin -> Int -> Bool
+buscar NoVazio aux =  False
+buscar (FilledNode a esquerda direita) aux | a == aux = True
+										   | a > aux = buscar esquerda aux
+										   | a < aux = buscar direita aux
