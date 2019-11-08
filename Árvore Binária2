@@ -1,0 +1,24 @@
+-- Arvore binária
+
+-- definir um tipo de variável
+data ArvBin = Nulo | No Int ArvBin ArvBin
+
+arv :: ArvBin
+--Criar a árvore
+arv = (No 10 
+			(No 5 -- nó a esquerda da raiz principal
+				(No 4 Nulo Nulo) (No 8 Nulo Nulo))
+			(No 15 -- nó a direita 
+				(No 11 Nulo Nulo) Nulo))
+
+--ler in-order
+order :: Int -> ArvBin -> [Int]
+order aux Nulo = []
+order aux (No a esquerda direita)  | aux == 0 = [a] ++ (order aux esquerda) ++ (order aux direita) --pre-order
+								   | aux == 1 = (order aux esquerda) ++ [a] ++ (order aux direita) --in-order
+								   | aux == 2 = (order aux esquerda) ++ (order aux direita) ++ [a] --posorder
+
+inorder :: ArvBin -> [Int]
+inorder Nulo = []
+inorder (No a esquerda direita) = (inorder esquerda) ++ [a] ++ (inorder direita)
+
